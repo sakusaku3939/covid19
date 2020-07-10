@@ -1,0 +1,26 @@
+{
+  "name": "covid19",
+  "version": "0.0.0",
+  "private": true,
+  "author": "sakusaku3939 <yuukiyuuki223@gmail.com>",
+  "description": "A simple helpful robot for your Company",
+  "dependencies": {
+    "hubot": "^3.3.2",
+    "hubot-diagnostics": "^1.0.0",
+    "hubot-google-images": "^0.2.7",
+    "hubot-google-translate": "^0.2.1",
+    "hubot-help": "^1.0.1",
+    "hubot-heroku-keepalive": "^1.0.3",
+    "hubot-maps": "0.0.3",
+    "hubot-pugme": "^0.1.1",
+    "hubot-redis-brain": "^1.0.0",
+    "hubot-rules": "^1.0.0",
+    "hubot-scripts": "^2.17.2",
+    "hubot-shipit": "^0.2.1",
+    "hubot-slack": "^4.8.0"
+  },
+  "engines": {
+    "node": "10.14.2",
+    "npm": "6.14.6"
+  }
+}
