@@ -21,14 +21,17 @@ module.exports = robot => {
         if (str.match(/全国/)) {
             msg.send('全国')
         } else {
-            json.getLastUpdate()
-            const index = str.indexOf(['都', '道', '府', '県'].find(list => str.indexOf(list) !== -1))
-            if (index !== -1) {
-                const prefectures = str.substring(0, index + 1)
-                msg.send(prefectures)
-                msg.send(json.getPrefecturePositive(prefectures))
-            } else {
-                msg.send("都道府県が見つかりませんでした")
+            const prefecturePositive = json.getPrefecturePositive(str)
+            switch (prefecturePositive) {
+                case 'NotFindPrefecture':
+                    msg.send("都道府県が見つかりませんでした")
+                    break
+                case 'FailedToGet':
+                    msg.send("情報の取得に失敗しました")
+                    break
+                default:
+                    msg.send(`${json.getLastUpdate()} 時点の東京都の累計陽性者数は${prefecturePositive}人です`)
+                    break
             }
         }
     });

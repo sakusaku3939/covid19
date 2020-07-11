@@ -42,19 +42,31 @@ function getPositive() {
 
 /**
  * データの最終更新日を取得
- * @returns {Number}
+ * @returns {String}
  */
 function getLastUpdate() {
-    return isEmpty(json_obj) ? "情報の取得に失敗しました" : json_obj['lastUpdate']
+    return String(json_obj['lastUpdate'])
 }
 
 /**
  * 指定した都道府県の累計陽性者数を取得
  * @param prefectures
- * @returns {Number}
+ * @returns {String}
  */
 function getPrefecturePositive(prefectures) {
-    return isEmpty(json_obj) ? "情報の取得に失敗しました" : json_obj['area'].find(obj => obj['name_jp'] === prefectures)['npatients']
+    if (!isEmpty(json_obj)) {
+        const matchPrefecture = json_obj['area'].find(obj => {
+            const name = obj['name_jp'].slice(0, -1)
+            return prefectures.match(new RegExp(name))
+        })
+        if (typeof (matchPrefecture) !== "undefined") {
+            return matchPrefecture['npatients']
+        } else {
+            return "NotFindPrefecture"
+        }
+    } else {
+        return "FailedToGet"
+    }
 }
 
 module.exports = {getLastUpdate, getPrefecturePositive}
