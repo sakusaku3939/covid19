@@ -1,7 +1,6 @@
 'use strict'
 let json_obj = {}
 getJSON()
-console.log(isEmpty(json_obj))
 
 /**
  * COVID-19 Japan より 新型コロナウイルス感染症について - 厚生労働省 をJSON化したデータを、HTTPSのGETメソッドを使用して取得
@@ -36,10 +35,6 @@ function isEmpty(obj) {
     return !Object.keys(obj).length
 }
 
-function getPositive() {
-
-}
-
 /**
  * データの最終更新日を取得
  * @returns {String}
@@ -51,7 +46,7 @@ function getLastUpdate() {
 /**
  * 指定した都道府県の累計陽性者数を取得
  * @param prefectures
- * @returns {String}
+ * @returns {*[]}
  */
 function getPrefecturePositive(prefectures) {
     if (!isEmpty(json_obj)) {
@@ -60,12 +55,12 @@ function getPrefecturePositive(prefectures) {
             return prefectures.match(new RegExp(name))
         })
         if (typeof (matchPrefecture) !== "undefined") {
-            return matchPrefecture['npatients']
+            return [matchPrefecture['name_jp'], matchPrefecture['npatients']]
         } else {
-            return "NotFindPrefecture"
+            return ["", "NotFindPrefecture"]
         }
     } else {
-        return "FailedToGet"
+        return ["", "FailedToGet"]
     }
 }
 
