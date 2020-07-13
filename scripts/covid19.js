@@ -1,22 +1,26 @@
 // Description:
 //   新型コロナウイルスに関する情報を取得してくれるbotです
 // Commands:
-//   covid19            - コマンド一覧を表示
+//   covid19            - covid19の使用方法を表示
 //   covid19 全国        - 全国の感染者数を表示
 //   covid19 (都道府県名) - 指定した都道府県の累計陽性者数を表示
+// データ提供元:
+//   COVID-19 Japan
 'use strict'
 const json = require('./index.js')
 
 module.exports = robot => {
     robot.hear(/covid19$/g, msg => {
         const description = "" +
-            "Description:\n" +
+            "covid19とは？:\n" +
             "```新型コロナウイルスに関する情報を取得してくれるbotです```\n" +
-            "Commands:\n" +
-            "```covid19             - コマンド一覧を表示\n" +
+            "コマンド一覧:\n" +
+            "```covid19             - covid19の使用方法を表示\n" +
             "covid19 全国        - 全国の感染者数を表示\n" +
-            "covid19 (都道府県名) - 指定した都道府県の累計陽性者数を表示```"
-        msg.send(description)
+            "covid19 (都道府県名) - 指定した都道府県の累計陽性者数を表示```\n" +
+            "データ提供元:\n" +
+            "```COVID-19 Japan```"
+            msg.send(description)
     })
     robot.respond(/(.+)/i, msg => {
         const str = msg.match[1].trim()
