@@ -12,7 +12,7 @@ const json = require('./index.js')
 module.exports = robot => {
     robot.hear(/covid19$/g, msg => {
         const description = "" +
-            "covid19とは？:\n" +
+            "Description:\n" +
             "```新型コロナウイルスに関する情報を取得してくれるbotです```\n" +
             "コマンド一覧:\n" +
             "```covid19             - covid19の使用方法を表示\n" +
