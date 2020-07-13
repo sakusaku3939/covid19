@@ -44,6 +44,14 @@ function getLastUpdate() {
 }
 
 /**
+ * 全国の累計陽性者数を取得
+ * @returns {string}
+ */
+function getNationalPositive() {
+    return !isEmpty(json_obj) ? String(json_obj['npatients']) : "FailedToGet"
+}
+
+/**
  * 指定した都道府県の累計陽性者数を取得
  * @param prefectures
  * @returns {*[]}
@@ -64,4 +72,6 @@ function getPrefecturePositive(prefectures) {
     }
 }
 
-module.exports = {getLastUpdate, getPrefecturePositive}
+module.exports = {
+    getLastUpdate, getNationalPositive, getPrefecturePositive
+}

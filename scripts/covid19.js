@@ -20,19 +20,24 @@ module.exports = robot => {
             "covid19 (都道府県名) - 指定した都道府県の累計陽性者数を表示```\n" +
             "データ提供元:\n" +
             "```COVID-19 Japan```"
-            msg.send(description)
+        msg.send(description)
     })
     robot.respond(/(.+)/i, msg => {
         const str = msg.match[1].trim()
         if (str.match(/全国/)) {
-            msg.send('全国')
+            const nationalPositive = json.getNationalPositive()
+            if (nationalPositive === "FailedToGet") {
+                msg.send("情報の取得に失敗しました")
+            } else {
+                msg.send(`${json.getLastUpdate()} 時点の全国の累計陽性者数は${nationalPositive}人です`)
+            }
         } else {
             const [prefectureName, prefecturePositive] = json.getPrefecturePositive(str)
             switch (prefecturePositive) {
-                case 'NotFindPrefecture':
+                case "NotFindPrefecture":
                     msg.send("都道府県が見つかりませんでした")
                     break
-                case 'FailedToGet':
+                case "FailedToGet":
                     msg.send("情報の取得に失敗しました")
                     break
                 default:
